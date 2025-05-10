@@ -1,10 +1,20 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { useState, useEffect } from "react";
 import { FcOk, FcDocument } from "react-icons/fc";
 import { MdBrightness2 } from "react-icons/md";
 import { TbBrightnessUp } from "react-icons/tb";
+import { easeInOut, motion } from "motion/react";
 
 export default function SoftSellLandingPage() {
+  const works = ["Upload License", "Get Valuation", "Get Paid"];
+  const whyUS = [
+    ["Fast Payments", "Get paid within 24 hours."],
+    ["Secure Process", "Your data is encrypted and safe."],
+    ["Best Valuations", "We offer top dollar for licenses."],
+    ["Expert Support", "Guided help from real people."],
+  ];
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -40,9 +50,20 @@ export default function SoftSellLandingPage() {
           </div>
           <button
             onClick={() => setDarkMode(!darkMode)}
-            className="px-4 py-2 border rounded text-md dark:border-gray-500"
+            className="px-2 py-2 border-2 rounded-full text-md dark:border-gray-500 w-20 overflow-hidden"
           >
-            {darkMode ? <TbBrightnessUp /> : <MdBrightness2 />}
+            <motion.div
+              animate={{
+                x: !darkMode ? 0 : 45,
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 300,
+                damping: 25,
+              }}
+            >
+              {darkMode ? <MdBrightness2 /> : <TbBrightnessUp />}
+            </motion.div>
           </button>
         </header>
 
@@ -54,60 +75,81 @@ export default function SoftSellLandingPage() {
           <p className="text-lg md:text-xl mb-6">
             Sell your software licenses in minutes with SoftSell.
           </p>
-          <button className="bg-white text-softBlue font-semibold py-2 px-6 rounded-full hover:bg-gray-100 transition ">
+          <motion.button
+            whileHover={{ scale: 1.2, transition: { ease: "easeInOut" } }}
+            whileTap={{ scale: 0.8, transition: { ease: "easeInOut" } }}
+            className="bg-white text-softBlue font-semibold py-2 px-6 rounded-full hover:bg-gray-100 transition "
+          >
             Sell My Licenses
-          </button>
+          </motion.button>
         </section>
 
         {/* How It Works */}
         <section className="py-16 px-6 text-center bg-gray-50 dark:bg-gray-800">
           <h2 className="text-3xl font-bold mb-10">How It Works</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {["Upload License", "Get Valuation", "Get Paid"].map((step, i) => (
-              <div
-                key={i}
-                className="p-6 bg-white shadow rounded dark:bg-gray-700"
-              >
-                <div className="text-5xl mb-4 flex justify-center">
-                  <FcDocument />
+          <div className="overflow-hidden w-full">
+            <motion.div
+              className="flex gap-8 w-max"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            >
+              {[...works, ...works].map((step, i) => (
+                <div
+                  key={i}
+                  className="min-w-[300px] p-6 bg-white shadow rounded dark:bg-gray-700"
+                >
+                  <div className="text-5xl mb-4 flex justify-center">
+                    <FcDocument />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">{step}</h3>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    Step {(i % works.length) + 1} of the process made simple and
+                    fast.
+                  </p>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{step}</h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  Step {i + 1} of the process made simple and fast.
-                </p>
-              </div>
-            ))}
+              ))}
+            </motion.div>
           </div>
         </section>
 
         {/* Why Choose Us */}
         <section className="py-16 px-6 text-center dark:bg-gray-700">
           <h2 className="text-3xl font-bold mb-10">Why Choose Us</h2>
-          <div className="grid md:grid-cols-4 gap-6">
-            {[
-              ["Fast Payments", "Get paid within 24 hours."],
-              ["Secure Process", "Your data is encrypted and safe."],
-              ["Best Valuations", "We offer top dollar for licenses."],
-              ["Expert Support", "Guided help from real people."],
-            ].map(([title, desc], i) => (
-              <div
-                key={i}
-                className="p-6 bg-gray-50 rounded shadow dark:bg-gray-900"
-              >
-                <div className="text-4xl mb-3 flex justify-center">
-                  <FcOk />
+
+          <div className="overflow-hidden">
+            <motion.div
+              className="flex gap-6 w-max"
+              animate={{ x: ["-50%", "0%"] }}
+              transition={{
+                duration: 12,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            >
+              {[...whyUS, ...whyUS].map(([title, desc], i) => (
+                <div
+                  key={i}
+                  className="min-w-[250px] p-6 bg-gray-50 rounded shadow dark:bg-gray-900"
+                >
+                  <div className="text-4xl mb-3 flex justify-center">
+                    <FcOk />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-1">{title}</h3>
+                  <p className="text-gray-700 text-sm dark:text-gray-300">
+                    {desc}
+                  </p>
                 </div>
-                <h3 className="font-semibold text-lg mb-1">{title}</h3>
-                <p className="text-gray-700 text-sm dark:text-gray-300">
-                  {desc}
-                </p>
-              </div>
-            ))}
+              ))}
+            </motion.div>
           </div>
         </section>
 
         {/* Testimonials */}
-        <section className="py-16 px-6 bg-gray-100 text-center dark:bg-gray-800">
+        <section className="py-16 px-6 bg-gray-100 text-center dark:bg-gray-800 overflow-hidden">
           <h2 className="text-3xl font-bold mb-10">What Our Customers Say</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {[
@@ -122,16 +164,22 @@ export default function SoftSellLandingPage() {
                 "Amazing service and great support team. Highly recommended!",
               ],
             ].map(([name, role, quote], i) => (
-              <div
+              <motion.div
                 key={i}
-                className="bg-white p-6 rounded shadow dark:bg-gray-700"
+                whileHover={{ scale: 1.2 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                style={{
+                  transformOrigin: "center",
+                  willChange: "transform",
+                }}
+                className="bg-white p-6 rounded shadow dark:bg-gray-700 cursor-pointer"
               >
                 <p className="italic mb-4">"{quote}"</p>
                 <p className="font-semibold">{name}</p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   {role}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </section>
@@ -188,12 +236,14 @@ export default function SoftSellLandingPage() {
               placeholder="Message"
               className="w-full p-3 border rounded dark:bg-gray-800 dark:border-gray-600"
             ></textarea>
-            <button
+            <motion.button
+              whileHover={{ scale: 1.1, transition: { ease: "easeInOut" } }}
+              whileTap={{ scale: 0.8, transition: { ease: "easeInOut" } }}
               type="submit"
-              className="bg-softBlue text-white px-6 py-3 rounded hover:bg-blue-700"
+              className="bg-softBlue text-white px-6 py-3 rounded "
             >
               Submit
-            </button>
+            </motion.button>
           </form>
         </section>
 
