@@ -1,141 +1,206 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { FcOk, FcDocument } from "react-icons/fc";
+import { MdBrightness2 } from "react-icons/md";
+import { TbBrightnessUp } from "react-icons/tb";
 
-const App = () => {
- 
+export default function SoftSellLandingPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    licenseType: "",
+    message: "",
+  });
+
+  const [darkMode, setDarkMode] = useState(
+    () => localStorage.getItem("darkMode") === "true"
+  );
+
+  useEffect(() => {
+    localStorage.setItem("darkMode", darkMode);
+  }, [darkMode]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("Form submitted successfully!");
+  };
 
   return (
-    <div className="font-sans">
-      {/* Hero Section */}
-      <section className="bg-softBlue text-white py-20  text-center">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">
-          Turn Software into Cash
-        </h1>
-        <p className="text-lg md:text-xl mb-6">
-          Sell your software licenses in minutes with SoftSell.
-        </p>
-        <button className="bg-white text-softBlue font-semibold py-2 px-6 rounded-full hover:bg-gray-100 transition">
-          Sell My Licenses
-        </button>
-      </section>
-
-      {/* How It Works */}
-      <section className="py-16 px-6 text-center bg-gray-50">
-        <h2 className="text-3xl font-bold mb-10">How It Works</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {["Upload License", "Get Valuation", "Get Paid"].map((step, i) => (
-            <div key={i} className="p-6 bg-white shadow rounded">
-              <div className="text-5xl mb-3 flex justify-center">
-                <FcDocument />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">{step}</h3>
-              <p className="text-gray-600">
-                Step {i + 1} of the process made simple and fast.
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="py-16 px-6 text-center">
-        <h2 className="text-3xl font-bold mb-10">Why Choose Us</h2>
-        <div className="grid md:grid-cols-4 gap-6">
-          {[
-            ["Fast Payments", "Get paid within 24 hours."],
-            ["Secure Process", "Your data is encrypted and safe."],
-            ["Best Valuations", "We offer top dollar for licenses."],
-            ["Expert Support", "Guided help from real people."],
-          ].map(([title, desc], i) => (
-            <div key={i} className="p-6 bg-gray-50 rounded shadow">
-              <div className="text-4xl mb-3 flex justify-center">
-                <FcOk />
-              </div>
-              <h3 className="font-semibold text-lg mb-1">{title}</h3>
-              <p className="text-gray-700 text-sm">{desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-16 px-6 bg-gray-100 text-center">
-        <h2 className="text-3xl font-bold mb-10">What Our Customers Say</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          {[
-            [
-              "Alice Smith",
-              "IT Manager, TechCorp",
-              "SoftSell made the process incredibly easy and quick!",
-            ],
-            [
-              "Bob Johnson",
-              "CTO, DevSolutions",
-              "Amazing service and great support team. Highly recommended!",
-            ],
-          ].map(([name, role, quote], i) => (
-            <div key={i} className="bg-white p-6 rounded shadow">
-              <p className="italic mb-4">"{quote}"</p>
-              <p className="font-semibold">{name}</p>
-              <p className="text-sm text-gray-600">{role}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Contact Form */}
-      <section className="py-16 px-6 text-center">
-        <h2 className="text-3xl font-bold mb-8">Get in Touch</h2>
-        <form className="max-w-xl mx-auto text-left space-y-4">
-          <input
-            name="name"
-            required
-            placeholder="Name"
-            className="w-full p-3 border rounded"
-          />
-          <input
-            name="email"
-            required
-            type="email"
-            placeholder="Email"
-            className="w-full p-3 border rounded"
-          />
-          <input
-            name="company"
-            placeholder="Company"
-            className="w-full p-3 border rounded"
-          />
-          <select
-            name="licenseType"
-            required
-            className="w-full p-3 border rounded"
-          >
-            <option value="">Select License Type</option>
-            <option value="Microsoft">Microsoft</option>
-            <option value="Adobe">Adobe</option>
-            <option value="Autodesk">Autodesk</option>
-            <option value="Other">Other</option>
-          </select>
-          <textarea
-            name="message"
-            rows="4"
-            placeholder="Message"
-            className="w-full p-3 border rounded"
-          ></textarea>
+    <div className={`${darkMode ? "dark" : ""}`}>
+      <div className="font-sans text-gray-800 dark:text-gray-200 dark:bg-gray-800">
+        <header className="flex justify-between p-4 ">
+          <div className="text-xl font-bold text-softBlue dark:text-white">
+            SoftSell
+          </div>
           <button
-            type="submit"
-            className="bg-softBlue text-white px-6 py-3 rounded "
+            onClick={() => setDarkMode(!darkMode)}
+            className="px-4 py-2 border rounded text-md dark:border-gray-500"
           >
-            Submit
+            {darkMode ? <TbBrightnessUp /> : <MdBrightness2 />}
           </button>
-        </form>
-      </section>
+        </header>
 
-      <footer className="py-6 text-center text-sm text-gray-500 bg-gray-50">
-        © 2025 SoftSell. All rights reserved.
-      </footer>
+        {/* Hero Section */}
+        <section className="bg-softBlue text-white py-20 px-6 text-center ">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+            Turn Software into Cash
+          </h1>
+          <p className="text-lg md:text-xl mb-6">
+            Sell your software licenses in minutes with SoftSell.
+          </p>
+          <button className="bg-white text-softBlue font-semibold py-2 px-6 rounded-full hover:bg-gray-100 transition ">
+            Sell My Licenses
+          </button>
+        </section>
+
+        {/* How It Works */}
+        <section className="py-16 px-6 text-center bg-gray-50 dark:bg-gray-800">
+          <h2 className="text-3xl font-bold mb-10">How It Works</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {["Upload License", "Get Valuation", "Get Paid"].map((step, i) => (
+              <div
+                key={i}
+                className="p-6 bg-white shadow rounded dark:bg-gray-700"
+              >
+                <div className="text-5xl mb-4 flex justify-center">
+                  <FcDocument />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{step}</h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Step {i + 1} of the process made simple and fast.
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Why Choose Us */}
+        <section className="py-16 px-6 text-center dark:bg-gray-700">
+          <h2 className="text-3xl font-bold mb-10">Why Choose Us</h2>
+          <div className="grid md:grid-cols-4 gap-6">
+            {[
+              ["Fast Payments", "Get paid within 24 hours."],
+              ["Secure Process", "Your data is encrypted and safe."],
+              ["Best Valuations", "We offer top dollar for licenses."],
+              ["Expert Support", "Guided help from real people."],
+            ].map(([title, desc], i) => (
+              <div
+                key={i}
+                className="p-6 bg-gray-50 rounded shadow dark:bg-gray-900"
+              >
+                <div className="text-4xl mb-3 flex justify-center">
+                  <FcOk />
+                </div>
+                <h3 className="font-semibold text-lg mb-1">{title}</h3>
+                <p className="text-gray-700 text-sm dark:text-gray-300">
+                  {desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="py-16 px-6 bg-gray-100 text-center dark:bg-gray-800">
+          <h2 className="text-3xl font-bold mb-10">What Our Customers Say</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              [
+                "Alice Smith",
+                "IT Manager, TechCorp",
+                "SoftSell made the process incredibly easy and quick!",
+              ],
+              [
+                "Bob Johnson",
+                "CTO, DevSolutions",
+                "Amazing service and great support team. Highly recommended!",
+              ],
+            ].map(([name, role, quote], i) => (
+              <div
+                key={i}
+                className="bg-white p-6 rounded shadow dark:bg-gray-700"
+              >
+                <p className="italic mb-4">"{quote}"</p>
+                <p className="font-semibold">{name}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {role}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Contact Form */}
+        <section className="py-16 px-6 text-center dark:bg-gray-700">
+          <h2 className="text-3xl font-bold mb-8">Get in Touch</h2>
+          <form
+            onSubmit={handleSubmit}
+            className="max-w-xl mx-auto text-left space-y-4"
+          >
+            <input
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              placeholder="Name"
+              className="w-full p-3 border rounded dark:bg-gray-800 dark:border-gray-600 "
+            />
+            <input
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              type="email"
+              placeholder="Email"
+              className="w-full p-3 border rounded dark:bg-gray-800 dark:border-gray-600"
+            />
+            <input
+              name="company"
+              value={formData.company}
+              onChange={handleChange}
+              placeholder="Company"
+              className="w-full p-3 border rounded dark:bg-gray-800 dark:border-gray-600"
+            />
+            <select
+              name="licenseType"
+              value={formData.licenseType}
+              onChange={handleChange}
+              required
+              className="w-full p-3 border rounded dark:bg-gray-800 dark:border-gray-600"
+            >
+              <option value="">Select License Type</option>
+              <option value="Microsoft">Microsoft</option>
+              <option value="Adobe">Adobe</option>
+              <option value="Autodesk">Autodesk</option>
+              <option value="Other">Other</option>
+            </select>
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              rows="4"
+              placeholder="Message"
+              className="w-full p-3 border rounded dark:bg-gray-800 dark:border-gray-600"
+            ></textarea>
+            <button
+              type="submit"
+              className="bg-softBlue text-white px-6 py-3 rounded hover:bg-blue-700"
+            >
+              Submit
+            </button>
+          </form>
+        </section>
+
+        <footer className="py-6 text-center text-sm text-gray-500 bg-gray-50 dark:bg-gray-800 dark:text-gray-400">
+          © 2025 SoftSell. All rights reserved.
+        </footer>
+      </div>
     </div>
   );
-};
-
-export default App;
+}
