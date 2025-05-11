@@ -1,6 +1,6 @@
 # SoftSell - One Page Product License Selling Website
 
-A responsive, single-page marketing website for the fictional software resale startup **SoftSell**. Built using **React.js** with **Vite** and styled with **Tailwind CSS**.
+A responsive, single-page product selling website for the fictional software resale startup **SoftSell**. Built using **React.js** with **Vite** and styled with **Tailwind CSS**.
 
 ---
 
@@ -30,7 +30,7 @@ A responsive, single-page marketing website for the fictional software resale st
 
 - **Mobile Responsive**  
   - Fully responsive
-  - 
+
 - **SEO Enhancements**  
   - Proper meta tags for SEO friendly
 
@@ -44,7 +44,7 @@ A responsive, single-page marketing website for the fictional software resale st
   - Dark Mode: Grays for readability and contrast
 - **Typography**: Clean sans-serif font for modern feel
 - **Structure**: Semantic HTML and accessibility-first focus
-- **No backend**: All data is static or stored in the browser (localStorage)
+- **No backend**: All data is static 
 
 ---
 
@@ -67,7 +67,7 @@ A responsive, single-page marketing website for the fictional software resale st
 ## 📁 Run Locally
 
 ```bash
-git clone https://github.com/your-username/softsell-landing.git
+git clone https://github.com/CodeAritra/Credex-Assignment
 cd softsell-landing
 npm install
 npm run dev
