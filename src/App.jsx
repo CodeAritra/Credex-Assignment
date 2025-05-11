@@ -5,6 +5,7 @@ import { FcOk, FcDocument } from "react-icons/fc";
 import { MdBrightness2 } from "react-icons/md";
 import { TbBrightnessUp } from "react-icons/tb";
 import { motion } from "motion/react";
+import Marquee from "react-fast-marquee";
 
 export default function SoftSellLandingPage() {
   const works = ["Upload License", "Get Valuation", "Get Paid"];
@@ -87,20 +88,18 @@ export default function SoftSellLandingPage() {
         {/* How It Works */}
         <section className="py-16 px-6 text-center bg-gray-50 dark:bg-gray-800">
           <h2 className="text-3xl font-bold mb-10">How It Works</h2>
-          <div className="overflow-hidden w-full">
-            <motion.div
-              className="flex gap-8 w-max"
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{
-                duration: 10,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-            >
+
+          <Marquee
+            gradient={false}
+            speed={100}
+            pauseOnHover={true}
+            className="overflow-hidden"
+          >
+            <div className="flex">
               {[...works, ...works].map((step, i) => (
                 <div
                   key={i}
-                  className="min-w-[300px] p-6 bg-white shadow rounded dark:bg-gray-700"
+                  className="ml-4 min-w-[300px] p-6 bg-white shadow rounded dark:bg-gray-700 cursor-pointer"
                 >
                   <div className="text-5xl mb-4 flex justify-center">
                     <FcDocument />
@@ -112,28 +111,26 @@ export default function SoftSellLandingPage() {
                   </p>
                 </div>
               ))}
-            </motion.div>
-          </div>
+            </div>
+          </Marquee>
         </section>
 
         {/* Why Choose Us */}
         <section className="py-16 px-6 text-center dark:bg-gray-700">
           <h2 className="text-3xl font-bold mb-10">Why Choose Us</h2>
 
-          <div className="overflow-hidden">
-            <motion.div
-              className="flex gap-6 w-max"
-              animate={{ x: ["-50%", "0%"] }}
-              transition={{
-                duration: 12,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-            >
+          <Marquee
+            gradient={false}
+            speed={100}
+            pauseOnHover={true}
+            direction="right"
+            className="overflow-hidden"
+          >
+            <div className="flex  w-max">
               {[...whyUS, ...whyUS].map(([title, desc], i) => (
                 <div
                   key={i}
-                  className="min-w-[250px] p-6 bg-gray-50 rounded shadow dark:bg-gray-900"
+                  className="ml-5 cursor-pointer min-w-[250px] p-6 bg-gray-50 rounded shadow dark:bg-gray-900"
                 >
                   <div className="text-4xl mb-3 flex justify-center">
                     <FcOk />
@@ -144,8 +141,8 @@ export default function SoftSellLandingPage() {
                   </p>
                 </div>
               ))}
-            </motion.div>
-          </div>
+            </div>
+          </Marquee>
         </section>
 
         {/* Testimonials */}
