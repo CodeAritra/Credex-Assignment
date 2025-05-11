@@ -57,7 +57,7 @@ A responsive, single-page product selling website for the fictional software res
 - **Dark Mode + Persistence**: 1 hour
 - **Responsiveness & UI Tweaks**: 1 hour
 - **SEO & Meta Tags**: 30 minutes
-- - **Framer motion**: 1 hour
+- **Framer motion**: 1 hour
 - **Bug Fixes / Polishing**: 30 minutes
 
 > **Total**: ~8 hours
