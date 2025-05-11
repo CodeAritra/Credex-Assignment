@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { FcOk, FcDocument } from "react-icons/fc";
 import { MdBrightness2 } from "react-icons/md";
 import { TbBrightnessUp } from "react-icons/tb";
-import { easeInOut, motion } from "motion/react";
+import { motion } from "motion/react";
 
 export default function SoftSellLandingPage() {
   const works = ["Upload License", "Get Valuation", "Get Paid"];
